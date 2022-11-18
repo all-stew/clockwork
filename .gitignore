@@ -35,5 +35,7 @@ build/
 **/resources/application-**.yaml
 !**/resources/application-**.sample.yaml
 
+### gradle ###
+.gradle
 
 

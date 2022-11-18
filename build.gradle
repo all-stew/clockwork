@@ -1,0 +1,65 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+import javax.tools.JavaCompiler
+
+plugins {
+    id 'org.springframework.boot' version '2.7.4' apply false
+    id 'io.spring.dependency-management' version '1.1.0' apply false
+    id 'io.freefair.lombok' version '6.5.1' apply false
+    id 'groovy'
+}
+
+ext {
+    springCloudVersion = '2021.0.1'
+
+    // data
+    mybatisPlusBootStarterVersion = '3.5.2'
+    mysqlConnectorJavaVersion = '5.1.49'
+
+    // mapstruct
+    mapstructVersion = '1.5.3.Final'
+}
+
+allprojects {
+    group = 'com.zhaojj11.clockwork'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'idea'
+    apply plugin: 'jacoco'
+    apply plugin: 'groovy'
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    tasks.withType(JavaCompiler) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom SpringBootPlugin.BOM_COORDINATES
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+        dependencies {
+            // 一方
+
+            // 二方
+
+            // 三方
+            // spring相关
+            dependency "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusBootStarterVersion}"
+            dependency "mysql:mysql-connector-java:${mysqlConnectorJavaVersion}"
+
+            // mapstruct
+            dependency "org.mapstruct:mapstruct:${mapstructVersion}"
+        }
+    }
+}
+

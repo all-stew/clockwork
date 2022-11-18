@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'clockwork'
+
+include ':common'
+include ':clockwork-api'

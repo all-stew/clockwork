@@ -1,0 +1,20 @@
+test {
+    useJUnitPlatform()
+
+    failFast = true
+    maxParallelForks = 4
+
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+    dependsOn test
+}
+
+dependencies {
+    testImplementation 'org.springframework.boot:spring-boot-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+}
