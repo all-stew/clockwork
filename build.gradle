@@ -59,6 +59,8 @@ subprojects {
 
             // mapstruct
             dependency "org.mapstruct:mapstruct:${mapstructVersion}"
+
+            dependency "junit:junit:4.13.2"
         }
     }
 }
