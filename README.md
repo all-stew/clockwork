@@ -1,4 +1,4 @@
 # clockwork
 
-![CircleCI](https://img.shields.io/circleci/build/github/zhaojj11/clockwork/main)
-![Codecov branch](https://img.shields.io/codecov/c/github/zhaojj11/clockwork/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/zhaojj11/clockwork/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/zhaojj11/clockwork/tree/main)
+[![codecov](https://codecov.io/gh/zhaojj11/clockwork/branch/main/graph/badge.svg?token=1OLGAQUI5A)](https://codecov.io/gh/zhaojj11/clockwork)
