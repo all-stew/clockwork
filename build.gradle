@@ -11,6 +11,7 @@ plugins {
 
 ext {
     springCloudVersion = '2021.0.1'
+    springSecurityVersion = '2.7.5'
 
     // data
     mybatisPlusBootStarterVersion = '3.5.2'
@@ -56,6 +57,7 @@ subprojects {
             // spring相关
             dependency "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusBootStarterVersion}"
             dependency "mysql:mysql-connector-java:${mysqlConnectorJavaVersion}"
+            dependency "org.springframework.boot:spring-boot-starter-security:${springSecurityVersion}"
 
             // mapstruct
             dependency "org.mapstruct:mapstruct:${mapstructVersion}"

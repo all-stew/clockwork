@@ -25,12 +25,13 @@ dependencies {
     // 三方
     // spring
     implementation('org.springframework.boot:spring-boot-starter-web')
-
+    implementation('org.springframework.boot:spring-boot-starter-security')
     // data
     implementation('com.baomidou:mybatis-plus-boot-starter')
     implementation('mysql:mysql-connector-java')
 
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
     testImplementation("junit:junit")
 }
