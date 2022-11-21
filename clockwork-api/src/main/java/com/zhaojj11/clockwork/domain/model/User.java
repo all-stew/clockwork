@@ -22,9 +22,11 @@ public class User {
     @TableId(type = IdType.AUTO)
     private Long id;
     private String username;
-    private String email;
-    private UserStatus status;
+    private String nickname;
     private String password;
+    private UserStatus status;
+    private String email;
+    private String avatar;
     @TableLogic
     private Boolean deleted;
     @TableField(typeHandler = DateTypeHandler.class, fill = FieldFill.INSERT)
