@@ -1,6 +1,7 @@
-package com.zhaojj11.clockwork.service;
+package com.zhaojj11.clockwork.service.user;
 
 import com.zhaojj11.clockwork.domain.model.User;
+import com.zhaojj11.clockwork.entity.dto.LoginUserDTO;
 import org.springframework.lang.NonNull;
 
 /**
@@ -40,4 +41,12 @@ public interface UserService {
      * @return user
      */
     User getById(long id);
+
+    /**
+     * 登录,并且返回jwt
+     *
+     * @param dto dto
+     * @return jwt
+     */
+    String login(LoginUserDTO dto);
 }

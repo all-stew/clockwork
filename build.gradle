@@ -19,7 +19,7 @@ ext {
     springRedisVersion = '2.7.5'
 
     // mapstruct
-    mapstructVersion = '1.5.3.Final'
+    mapstructVersion = '1.4.1.Final'
 
     jjwtVersion = '0.9.0'
 }
@@ -57,6 +57,8 @@ subprojects {
             // 二方
 
             // 三方
+            // java
+            dependency "javax.xml.bind:jaxb-api:2.3.0"
             // spring相关
             dependency "org.springframework.boot:spring-boot-starter-security:${springSecurityVersion}"
 
@@ -67,6 +69,7 @@ subprojects {
 
             // mapstruct
             dependency "org.mapstruct:mapstruct:${mapstructVersion}"
+            dependency "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
             dependency "io.jsonwebtoken:jjwt:${jjwtVersion}"
 

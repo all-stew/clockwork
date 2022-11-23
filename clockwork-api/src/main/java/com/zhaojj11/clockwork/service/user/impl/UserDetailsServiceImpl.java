@@ -1,4 +1,4 @@
-package com.zhaojj11.clockwork.service.impl;
+package com.zhaojj11.clockwork.service.user.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zhaojj11.clockwork.domain.dao.UserDao;

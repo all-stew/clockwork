@@ -10,7 +10,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @author zhaojj11
@@ -27,10 +26,6 @@ public class JwtUtil {
      */
     public static final String JWT_KEY = "test";
 
-    public static String getUuid() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
-    }
-
     /**
      * 生成默认的jwt
      *
@@ -38,7 +33,7 @@ public class JwtUtil {
      * @return jwt
      */
     public static String createJwt(String subject) {
-        return getJwtBuilder(subject, JWT_TTL, getUuid()).compact();
+        return getJwtBuilder(subject, JWT_TTL, StringUtil.getUuid()).compact();
     }
 
     /**
@@ -49,7 +44,7 @@ public class JwtUtil {
      * @return jwt
      */
     public static String createJwt(String subject, long ttlMillis) {
-        return getJwtBuilder(subject, ttlMillis, getUuid()).compact();
+        return getJwtBuilder(subject, ttlMillis, StringUtil.getUuid()).compact();
     }
 
     /**
@@ -106,7 +101,7 @@ public class JwtUtil {
     public static Claims parseJwt(String jwt) {
         return Jwts.parser()
                 .setSigningKey(generalKey())
-                .parseClaimsJwt(jwt)
+                .parseClaimsJws(jwt)
                 .getBody();
     }
 }
