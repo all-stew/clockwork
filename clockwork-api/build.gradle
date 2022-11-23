@@ -23,14 +23,33 @@ dependencies {
     // 二方
 
     // 三方
+    // java
+    implementation('javax.xml.bind:jaxb-api')
     // spring
     implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
 
     // data
     implementation('com.baomidou:mybatis-plus-boot-starter')
     implementation('mysql:mysql-connector-java')
 
+    // jwt
+    implementation('io.jsonwebtoken:jjwt')
+
+    // mapstruct
+    implementation('org.mapstruct:mapstruct')
+    annotationProcessor('org.mapstruct:mapstruct-processor')
+    testAnnotationProcessor('org.mapstruct:mapstruct-processor')
+
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
     testImplementation("junit:junit")
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
 }

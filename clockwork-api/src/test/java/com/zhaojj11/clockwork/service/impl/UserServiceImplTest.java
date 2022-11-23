@@ -2,7 +2,8 @@ package com.zhaojj11.clockwork.service.impl;
 
 import com.zhaojj11.clockwork.domain.dao.UserDao;
 import com.zhaojj11.clockwork.domain.model.User;
-import com.zhaojj11.clockwork.service.UserService;
+import com.zhaojj11.clockwork.service.user.UserService;
+import com.zhaojj11.clockwork.service.user.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(SpringRunner.class)
 class UserServiceImplTest {
 
-    private static final UserService userService = new UserServiceImpl(null);
+    private static final UserService userService = new UserServiceImpl(null, null);
     @MockBean
     private static UserDao userDao;
 

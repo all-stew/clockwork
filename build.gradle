@@ -11,13 +11,17 @@ plugins {
 
 ext {
     springCloudVersion = '2021.0.1'
+    springSecurityVersion = '2.7.5'
 
     // data
     mybatisPlusBootStarterVersion = '3.5.2'
     mysqlConnectorJavaVersion = '5.1.49'
+    springRedisVersion = '2.7.5'
 
     // mapstruct
-    mapstructVersion = '1.5.3.Final'
+    mapstructVersion = '1.4.1.Final'
+
+    jjwtVersion = '0.9.0'
 }
 
 allprojects {
@@ -53,12 +57,21 @@ subprojects {
             // 二方
 
             // 三方
+            // java
+            dependency "javax.xml.bind:jaxb-api:2.3.0"
             // spring相关
+            dependency "org.springframework.boot:spring-boot-starter-security:${springSecurityVersion}"
+
+            // data
             dependency "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusBootStarterVersion}"
             dependency "mysql:mysql-connector-java:${mysqlConnectorJavaVersion}"
+            dependency "org.springframework.boot:spring-boot-starter-data-redis:${springRedisVersion}"
 
             // mapstruct
             dependency "org.mapstruct:mapstruct:${mapstructVersion}"
+            dependency "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+            dependency "io.jsonwebtoken:jjwt:${jjwtVersion}"
 
             dependency "junit:junit:4.13.2"
         }
