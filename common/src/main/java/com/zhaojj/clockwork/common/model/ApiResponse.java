@@ -5,14 +5,18 @@ import com.zhaojj.clockwork.common.enums.ApiResultCodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
+ * 统一API返回
+ *
  * @author zhaojj11
  */
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse<T> implements Serializable {
     private boolean success;

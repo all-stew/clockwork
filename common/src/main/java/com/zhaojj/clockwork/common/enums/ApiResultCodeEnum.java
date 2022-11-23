@@ -2,6 +2,8 @@ package com.zhaojj.clockwork.common.enums;
 
 
 /**
+ * 统一返回码枚举
+ *
  * @author zhaojj11
  */
 public enum ApiResultCodeEnum {
