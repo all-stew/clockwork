@@ -21,9 +21,12 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf().ignoringAntMatchers("/api/v1/user/login")
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/api/v1/user/login").anonymous()
+                .authorizeRequests()
+                .antMatchers("/api/v1/user/login").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .build();
