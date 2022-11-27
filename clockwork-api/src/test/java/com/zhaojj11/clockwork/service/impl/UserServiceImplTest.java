@@ -44,7 +44,7 @@ class UserServiceImplTest {
 
     @Test
     void save() {
-        User user = User.builder().username("test").email("test@test.com").status(User.UserStatus.ENABLE).password("").deleted(false).createdTime(LocalDateTime.now()).updatedTime(LocalDateTime.now()).build();
+        User user = User.builder().username("test").email("test@test.com").status(User.UserStatus.ENABLE).password("").deleted(false).nickname("test").avatar("avatar").createdTime(LocalDateTime.now()).updatedTime(LocalDateTime.now()).build();
         Mockito.when(userDao.save(ArgumentMatchers.any(User.class))).thenReturn(true);
         boolean saved = userService.save(user);
         assertTrue(saved);

@@ -3,9 +3,9 @@ package com.zhaojj.clockwork.common.model;
 import com.zhaojj.clockwork.common.constants.StringConstant;
 import com.zhaojj.clockwork.common.enums.ApiResultCodeEnum;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -14,13 +14,13 @@ import java.io.Serializable;
  *
  * @author zhaojj11
  */
-@Data
-@Builder
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse<T> implements Serializable {
     private boolean success;
-    private Integer code;
+    private int code;
     private String msg;
     private T data;
 
@@ -36,7 +36,7 @@ public class ApiResponse<T> implements Serializable {
         return new ApiResponse<>(false, ApiResultCodeEnum.FAILED.getCode(), msg, null);
     }
 
-    public static <T> ApiResponse<T> fail(Integer code, String msg) {
+    public static <T> ApiResponse<T> fail(int code, String msg) {
         return new ApiResponse<>(false, code, msg, null);
     }
 }

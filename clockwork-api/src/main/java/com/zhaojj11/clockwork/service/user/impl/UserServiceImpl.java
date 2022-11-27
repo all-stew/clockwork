@@ -4,6 +4,7 @@ import com.zhaojj11.clockwork.common.utils.JwtUtil;
 import com.zhaojj11.clockwork.domain.dao.UserDao;
 import com.zhaojj11.clockwork.domain.model.User;
 import com.zhaojj11.clockwork.entity.dto.LoginUserDTO;
+import com.zhaojj11.clockwork.exception.UserException;
 import com.zhaojj11.clockwork.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
             // TODO 把用户数据存入redis
         } catch (AuthenticationException e) {
             // 如果认证没过,会直接抛出异常
-            throw new RuntimeException(e);
+            throw new UserException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
