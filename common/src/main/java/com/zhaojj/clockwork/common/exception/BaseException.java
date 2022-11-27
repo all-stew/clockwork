@@ -6,7 +6,7 @@ package com.zhaojj.clockwork.common.exception;
  * @author zhaojj11
  */
 public class BaseException extends RuntimeException {
-    protected Integer code;
+    protected int code;
 
     public BaseException(String message) {
         super(message);

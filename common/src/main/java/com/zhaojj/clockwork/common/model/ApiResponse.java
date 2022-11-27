@@ -20,7 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ApiResponse<T> implements Serializable {
     private boolean success;
-    private Integer code;
+    private int code;
     private String msg;
     private T data;
 
@@ -36,7 +36,7 @@ public class ApiResponse<T> implements Serializable {
         return new ApiResponse<>(false, ApiResultCodeEnum.FAILED.getCode(), msg, null);
     }
 
-    public static <T> ApiResponse<T> fail(Integer code, String msg) {
+    public static <T> ApiResponse<T> fail(int code, String msg) {
         return new ApiResponse<>(false, code, msg, null);
     }
 }

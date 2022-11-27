@@ -24,9 +24,29 @@ class ApiResponseTest {
 
     @Test
     void testFail() {
-        ApiResponse<Object> ok = ApiResponse.fail("fail");
-        Assertions.assertEquals(ApiResultCodeEnum.FAILED.getCode(), ok.getCode());
-        Assertions.assertFalse(ok.isSuccess());
-        Assertions.assertEquals("fail", ok.getMsg());
+        ApiResponse<Object> fail = ApiResponse.fail("fail");
+        Assertions.assertEquals(ApiResultCodeEnum.FAILED.getCode(), fail.getCode());
+        Assertions.assertFalse(fail.isSuccess());
+        Assertions.assertEquals("fail", fail.getMsg());
+
+        ApiResponse<Object> failWithCode = ApiResponse.fail(401, "fail");
+        Assertions.assertFalse(failWithCode.isSuccess());
+        Assertions.assertEquals("fail", failWithCode.getMsg());
+        Assertions.assertEquals(401, failWithCode.getCode());
+    }
+
+    @Test
+    void testBuild() {
+        ApiResponse<ArrayList<Integer>> apiResponse = new ApiResponse<>();
+        apiResponse.setMsg("hello");
+        apiResponse.setCode(300);
+        apiResponse.setSuccess(true);
+        ArrayList<Integer> integerList = new ArrayList<>();
+        integerList.add(1);
+        apiResponse.setData(integerList);
+        Assertions.assertEquals(300, apiResponse.getCode());
+        Assertions.assertTrue(apiResponse.isSuccess());
+        Assertions.assertEquals(ArrayList.class, apiResponse.getData().getClass());
+        Assertions.assertEquals(1, apiResponse.getData().size());
     }
 }

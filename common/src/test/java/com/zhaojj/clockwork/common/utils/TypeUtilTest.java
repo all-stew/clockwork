@@ -12,7 +12,7 @@ class TypeUtilTest {
     @Test
     void transformNullLocalDateTime() {
         long epochSecond = TypeUtil.toLong(null);
-        Assertions.assertEquals(epochSecond, 0);
+        Assertions.assertEquals(0, epochSecond);
     }
 
     @Test
