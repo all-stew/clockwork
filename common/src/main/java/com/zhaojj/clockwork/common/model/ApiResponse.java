@@ -3,9 +3,9 @@ package com.zhaojj.clockwork.common.model;
 import com.zhaojj.clockwork.common.constants.StringConstant;
 import com.zhaojj.clockwork.common.enums.ApiResultCodeEnum;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -14,8 +14,8 @@ import java.io.Serializable;
  *
  * @author zhaojj11
  */
-@Data
-@Builder
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse<T> implements Serializable {
