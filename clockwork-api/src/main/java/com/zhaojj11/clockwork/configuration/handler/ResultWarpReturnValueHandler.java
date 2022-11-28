@@ -1,4 +1,4 @@
-package com.zhaojj11.clockwork.user.configuration.handler;
+package com.zhaojj11.clockwork.configuration.handler;
 
 import com.zhaojj11.clockwork.common.model.ApiResponse;
 import lombok.RequiredArgsConstructor;

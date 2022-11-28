@@ -1,6 +1,7 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
 import com.zhaojj11.clockwork.common.utils.JwtUtil;
+import com.zhaojj11.clockwork.exception.UserException;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
 import com.zhaojj11.clockwork.user.domain.model.User;
 import com.zhaojj11.clockwork.user.entity.dto.LoginUserDTO;
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
             // TODO 把用户数据存入redis
         } catch (AuthenticationException e) {
             // 如果认证没过,会直接抛出异常
-            throw new RuntimeException(e);
+            throw new UserException(400, "登录失败");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

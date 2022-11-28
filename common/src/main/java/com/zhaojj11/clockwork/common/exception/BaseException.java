@@ -1,4 +1,4 @@
-package com.zhaojj.clockwork.common.exception;
+package com.zhaojj11.clockwork.common.exception;
 
 /**
  * 基础异常

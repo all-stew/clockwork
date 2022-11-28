@@ -1,6 +1,6 @@
 package com.zhaojj11.clockwork.exception;
 
-import com.zhaojj.clockwork.common.exception.BaseException;
+import com.zhaojj11.clockwork.common.exception.BaseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

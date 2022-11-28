@@ -1,4 +1,4 @@
-package com.zhaojj11.clockwork.user.configuration.security;
+package com.zhaojj11.clockwork.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package com.zhaojj11.clockwork.user.configuration;
+package com.zhaojj11.clockwork.configuration;
 
 
-import com.zhaojj11.clockwork.user.configuration.handler.ResultWarpReturnValueHandler;
+import com.zhaojj11.clockwork.configuration.handler.ResultWarpReturnValueHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Configuration;

@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName(value = "users", autoResultMap = true)
-public class User {
+public class User implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
     private String username;
