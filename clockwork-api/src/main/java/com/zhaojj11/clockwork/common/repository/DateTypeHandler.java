@@ -1,6 +1,6 @@
 package com.zhaojj11.clockwork.common.repository;
 
-import com.zhaojj.clockwork.common.utils.TypeUtil;
+import com.zhaojj11.clockwork.common.utils.TypeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
