@@ -1,5 +1,6 @@
 package com.zhaojj11.clockwork.domain.model;
 
+import com.zhaojj11.clockwork.user.domain.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

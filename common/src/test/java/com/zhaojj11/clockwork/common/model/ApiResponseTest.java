@@ -1,6 +1,6 @@
-package com.zhaojj.clockwork.common.model;
+package com.zhaojj11.clockwork.common.model;
 
-import com.zhaojj.clockwork.common.enums.ApiResultCodeEnum;
+import com.zhaojj11.clockwork.common.enums.ApiResultCodeEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
