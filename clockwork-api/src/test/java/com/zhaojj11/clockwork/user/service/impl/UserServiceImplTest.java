@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(SpringRunner.class)
 class UserServiceImplTest {
 
-    private static final UserService userService = new UserServiceImpl(null, null);
+    private static final UserService userService = new UserServiceImpl(null, null, null);
     @MockBean
     private static UserDao userDao;
 
