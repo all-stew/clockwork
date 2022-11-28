@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author zhaojj11
  */
 @SpringBootApplication
-@MapperScan("com.zhaojj11.clockwork.domain")
+@MapperScan("com.zhaojj11.clockwork.user.domain")
 public class ClockworkApiApplication {
 
     public static void main(String[] args) {
