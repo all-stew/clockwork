@@ -1,6 +1,6 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
-import com.zhaojj.clockwork.common.constants.RedisConstants;
+import com.zhaojj11.clockwork.common.constants.RedisConstants;
 import com.zhaojj11.clockwork.common.utils.JwtUtil;
 import com.zhaojj11.clockwork.exception.UserException;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
