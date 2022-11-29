@@ -9,5 +9,7 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class StringConstant {
+    public static final String PROJECT_NAME = "clockwork";
     public static final String OK = "OK";
+    public static final String COLON = ":";
 }
