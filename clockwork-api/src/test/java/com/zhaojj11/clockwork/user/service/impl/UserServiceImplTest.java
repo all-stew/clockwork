@@ -1,45 +1,48 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
+import com.zhaojj11.clockwork.common.constants.RedisConstants;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
 import com.zhaojj11.clockwork.user.domain.model.User;
-import com.zhaojj11.clockwork.user.service.UserService;
-import org.junit.jupiter.api.BeforeAll;
+import com.zhaojj11.clockwork.user.entity.dto.LoginUserDTO;
+import io.codearte.jfairy.Fairy;
+import io.codearte.jfairy.producer.person.Person;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.lang.reflect.Field;
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+@Import({UserServiceImpl.class})
+@ExtendWith(SpringExtension.class)
 class UserServiceImplTest {
-
-    private static final UserService userService = new UserServiceImpl(null, null, null);
+    private static final Fairy fairy = Fairy.create();
+    @Mock
+    ValueOperations<String, String> valueOperations;
+    @Resource
+    private UserServiceImpl userService;
     @MockBean
-    private static UserDao userDao;
-
-    @BeforeAll
-    static void init() throws Exception {
-        userDao = (UserDao) initBean();
-    }
-
-    // TODO 逻辑抽离出去 并且Mock脱离数据库+不启动Spring+优化测试速度+不引入项目组件
-    static Object initBean() throws Exception {
-        Class<?> clazzRoot = ((Object) UserServiceImplTest.userService).getClass();
-        Object memberFieldObj = Mockito.mock((Class<?>) UserDao.class);
-        String simpleName = UserDao.class.getSimpleName();
-        Field field = clazzRoot.getDeclaredField(simpleName.substring(0, 1).toLowerCase() + simpleName.substring(1));
-        field.setAccessible(true);
-        field.set(UserServiceImplTest.userService, memberFieldObj);
-        return memberFieldObj;
-    }
-
+    private UserDao userDao;
+    @MockBean
+    private RedisTemplate<String, String> redisTemplate;
+    @MockBean
+    private AuthenticationConfiguration authenticationConfiguration;
+    @MockBean
+    private AuthenticationManager authenticationManager;
 
     @Test
     void save() {
@@ -71,5 +74,39 @@ class UserServiceImplTest {
         Mockito.when(userService.getById(Mockito.anyLong())).thenReturn(userData);
         User user = userService.getById(6);
         assertNotNull(user);
+    }
+
+    @Test
+    void testLoginSuccessful() throws Exception {
+        Person person = fairy.person();
+        String username = person.getUsername();
+        String password = person.getPassword();
+        LoginUserDTO loginUserDTO = LoginUserDTO.builder().username(username).password(password).build();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode(password);
+        User userData = User.builder().id(1L)
+                .username(username)
+                .password(encode)
+                .status(User.UserStatus.ENABLE)
+                .build();
+
+        Mockito.when(authenticationConfiguration.getAuthenticationManager()).thenReturn(authenticationManager);
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(loginUserDTO.getUsername(), loginUserDTO.getPassword());
+
+        UserDetailsServiceImpl.LoginUser loginUser = new UserDetailsServiceImpl.LoginUser();
+        loginUser.setUser(userData);
+        UsernamePasswordAuthenticationToken authedToken = new UsernamePasswordAuthenticationToken(loginUser, loginUserDTO.getPassword());
+        Mockito.when(authenticationManager.authenticate(token)).thenReturn(authedToken);
+        Mockito.when(redisTemplate.opsForValue()).thenReturn(valueOperations);
+        Mockito.doAnswer(invocation -> {
+            Object arg0 = invocation.getArgument(0);
+            String key = String.format(RedisConstants.USER_LOGIN_TOKEN, username);
+            assertEquals(arg0, key);
+            return null;
+        }).when(valueOperations).set(Mockito.anyString(), Mockito.anyString());
+
+        String login = userService.login(loginUserDTO);
+        assertTrue(StringUtils.isNotBlank(login));
     }
 }
