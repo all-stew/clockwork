@@ -1,6 +1,5 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
 import com.zhaojj11.clockwork.user.domain.model.User;
 import lombok.AllArgsConstructor;
@@ -30,10 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 查询用户信息
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getUsername, username);
-
-        User user = userDao.getBaseMapper().selectOne(queryWrapper);
+        User user = userDao.findByUsername(username);
         // 如果没有查询到用户，则抛出异常
         if (Objects.isNull(user)) {
             throw new RuntimeException("invalid username or password");

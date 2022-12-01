@@ -45,7 +45,8 @@ dependencies {
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')
-    testImplementation("junit:junit")
+    testImplementation('junit:junit')
+    testImplementation('io.codearte.jfairy:jfairy:0.5.9')
 }
 
 compileJava {
