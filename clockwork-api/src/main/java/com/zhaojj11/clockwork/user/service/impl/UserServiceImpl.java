@@ -1,6 +1,7 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
 import com.zhaojj11.clockwork.common.constants.RedisConstants;
+import com.zhaojj11.clockwork.common.exception.BaseException;
 import com.zhaojj11.clockwork.common.utils.JwtUtil;
 import com.zhaojj11.clockwork.exception.UserException;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
             // 如果认证没过,会直接抛出异常
             throw new UserException(400, "登录失败");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new BaseException(e);
         }
     }
 }

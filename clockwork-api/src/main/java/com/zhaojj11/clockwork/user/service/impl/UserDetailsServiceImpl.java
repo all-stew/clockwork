@@ -1,5 +1,6 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
+import com.zhaojj11.clockwork.exception.UserException;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
 import com.zhaojj11.clockwork.user.domain.model.User;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userDao.findByUsername(username);
         // 如果没有查询到用户，则抛出异常
         if (Objects.isNull(user)) {
-            throw new RuntimeException("invalid username or password");
+            throw new UserException("invalid username or password");
         }
 
         // TODO 查询权限信息

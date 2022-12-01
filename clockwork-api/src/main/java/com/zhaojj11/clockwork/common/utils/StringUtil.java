@@ -11,6 +11,6 @@ import java.util.UUID;
 public class StringUtil {
 
     public static String getUuid() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }

@@ -9,6 +9,6 @@ class StringUtilTest {
     @Test
     void getUuid() {
         String uuid = StringUtil.getUuid();
-        assertEquals(uuid.length(), 32);
+        assertEquals(32, uuid.length());
     }
 }
