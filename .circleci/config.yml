@@ -1,15 +1,17 @@
+version: 2.1
+
 jobs:
   build:
     docker:
-      - image: 'node:latest'
+      - image: 'circleci/openjdk:17-jdk'
     steps:
       - checkout
-      - sonarcloud/scan
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.1.0
-version: 2.1
+      - run:
+          name: Analyze on SonarCloud
+          command: gradle build sonarqube"
+
 workflows:
   main:
     jobs:
       - build:
-          context: sonarcloud
+          context: SonarCloud
