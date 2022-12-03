@@ -42,6 +42,9 @@ dependencies {
     annotationProcessor('org.mapstruct:mapstruct-processor')
     testAnnotationProcessor('org.mapstruct:mapstruct-processor')
 
+    // apache common
+    implementation('org.apache.commons:commons-lang3')
+
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')

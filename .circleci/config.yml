@@ -8,10 +8,10 @@ jobs:
       - checkout
       - run:
           name: Analyze on SonarCloud
-          command: gradle build sonarqube
+          command: gradle build sonar
       - run:
           name: upload code coverage
-          command: gradle test jacocoTestReport sonarqube
+          command: gradle test jacocoTestReport sonar
 
 workflows:
   main:
