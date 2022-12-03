@@ -19,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * UserServiceImpl
  *
@@ -68,7 +70,7 @@ public class UserServiceImpl implements UserService {
             String jwt = JwtUtil.createJwt(username);
 
             String loginUserKey = String.format(RedisConstants.USER_LOGIN_TOKEN, username);
-            redisTemplate.opsForValue().set(loginUserKey, jwt);
+            redisTemplate.opsForValue().set(loginUserKey, "", 24, TimeUnit.HOURS);
             return jwt;
         } catch (AuthenticationException e) {
             // 如果认证没过,会直接抛出异常

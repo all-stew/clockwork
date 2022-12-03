@@ -31,7 +31,12 @@ ext {
     // mapstruct
     mapstructVersion = '1.4.1.Final'
 
+    // apache common
+    apacheCommonLang3Version = '3.12.0'
+
     jjwtVersion = '0.9.0'
+
+    junitVersion = '4.13.2'
 }
 
 allprojects {
@@ -81,9 +86,14 @@ subprojects {
             dependency "org.mapstruct:mapstruct:${mapstructVersion}"
             dependency "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
+            // apache common
+            dependency "org.apache.commons:commons-lang3:${apacheCommonLang3Version}"
+
+            dependency "javax.annotations:jsr250-api:1.0"
+
             dependency "io.jsonwebtoken:jjwt:${jjwtVersion}"
 
-            dependency "junit:junit:4.13.2"
+            dependency "junit:junit:${junitVersion}"
         }
     }
 }
