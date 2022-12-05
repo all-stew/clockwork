@@ -49,4 +49,9 @@ public interface UserService {
      * @return jwt
      */
     String login(LoginUserDTO dto);
+
+    /**
+     * 登出
+     */
+    void logout();
 }

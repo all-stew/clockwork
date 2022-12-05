@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -76,7 +77,19 @@ public class UserServiceImpl implements UserService {
             // 如果认证没过,会直接抛出异常
             throw new UserException(400, "登录失败");
         } catch (Exception e) {
-            throw new BaseException(e);
+            throw new BaseException(e.getMessage());
         }
+    }
+
+    @Override
+    public void logout() {
+        // 获取SecurityContextHolder中的用户username
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsServiceImpl.LoginUser loginUser = (UserDetailsServiceImpl.LoginUser) authentication.getPrincipal();
+        String username = loginUser.getUser().getUsername();
+
+        // 删除redis中的值
+        String loginUserKey = String.format(RedisConstants.USER_LOGIN_TOKEN, username);
+        redisTemplate.delete(loginUserKey);
     }
 }
