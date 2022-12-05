@@ -1,6 +1,5 @@
-package com.zhaojj11.clockwork.domain.model;
+package com.zhaojj11.clockwork.user.domain.model;
 
-import com.zhaojj11.clockwork.user.domain.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +30,10 @@ class UserTest {
         Assertions.assertEquals(now, user.getCreatedTime());
         user.setUpdatedTime(now);
         Assertions.assertEquals(now, user.getUpdatedTime());
+    }
+
+    @Test
+    void testUserStatus() {
+        Assertions.assertEquals(User.UserStatus.ENABLE.getStatus(), 0);
     }
 }

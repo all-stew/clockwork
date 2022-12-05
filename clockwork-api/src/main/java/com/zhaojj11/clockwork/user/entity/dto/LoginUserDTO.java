@@ -1,18 +1,23 @@
 package com.zhaojj11.clockwork.user.entity.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author zhaojj11
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class LoginUserDTO {
     private String username;
     private String password;
+
+    public static LoginUserDTO build(String username, String password) {
+        LoginUserDTO dto = new LoginUserDTO();
+        dto.setUsername(username);
+        dto.setPassword(password);
+        return dto;
+    }
 }

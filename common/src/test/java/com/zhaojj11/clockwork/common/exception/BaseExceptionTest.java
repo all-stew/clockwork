@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Test;
 class BaseExceptionTest {
     @Test
     void testBaseException() {
-        try {
+        Assertions.assertThrows(BaseException.class, () -> {
             throw new BaseException("hello");
-        } catch (BaseException e) {
-            Assertions.assertEquals("hello", e.getMessage());
-        }
+        }, "hello");
+
+        Assertions.assertThrows(BaseException.class, () -> {
+            throw new BaseException(new Exception("hello"));
+        }, "hello");
 
         try {
             throw new BaseException(200, "hello");

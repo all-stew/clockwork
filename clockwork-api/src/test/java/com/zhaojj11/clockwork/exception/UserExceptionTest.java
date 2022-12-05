@@ -7,11 +7,14 @@ import org.junit.jupiter.api.Test;
 class UserExceptionTest {
     @Test
     void testUserException() {
-        try {
+
+        Assertions.assertThrows(UserException.class, () -> {
             throw new UserException("hello");
-        } catch (BaseException e) {
-            Assertions.assertEquals("hello", e.getMessage());
-        }
+        }, "hello");
+
+        Assertions.assertThrows(UserException.class, () -> {
+            throw new UserException(new Exception("hello"));
+        }, "hello");
 
         try {
             throw new UserException(200, "hello");
