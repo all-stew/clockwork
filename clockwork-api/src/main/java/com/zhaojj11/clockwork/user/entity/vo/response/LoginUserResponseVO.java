@@ -1,17 +1,21 @@
 package com.zhaojj11.clockwork.user.entity.vo.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author zhaojj11
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@Getter
+@ToString
 public class LoginUserResponseVO {
     private String token;
+
+    public static LoginUserResponseVO build(String jwt) {
+        LoginUserResponseVO vo = new LoginUserResponseVO();
+        vo.setToken(jwt);
+        return vo;
+    }
 }

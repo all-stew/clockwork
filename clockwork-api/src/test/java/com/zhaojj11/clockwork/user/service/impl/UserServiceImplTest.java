@@ -1,12 +1,15 @@
 package com.zhaojj11.clockwork.user.service.impl;
 
 import com.zhaojj11.clockwork.common.constants.RedisConstants;
+import com.zhaojj11.clockwork.common.exception.BaseException;
+import com.zhaojj11.clockwork.exception.UserException;
 import com.zhaojj11.clockwork.user.domain.dao.UserDao;
 import com.zhaojj11.clockwork.user.domain.model.User;
 import com.zhaojj11.clockwork.user.entity.dto.LoginUserDTO;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.person.Person;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -17,6 +20,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -81,7 +85,7 @@ class UserServiceImplTest {
         Person person = fairy.person();
         String username = person.getUsername();
         String password = person.getPassword();
-        LoginUserDTO loginUserDTO = LoginUserDTO.builder().username(username).password(password).build();
+        LoginUserDTO loginUserDTO = LoginUserDTO.build(username, password);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encode = passwordEncoder.encode(password);
         User userData = User.builder().id(1L)
@@ -108,5 +112,35 @@ class UserServiceImplTest {
 
         String login = userService.login(loginUserDTO);
         assertTrue(StringUtils.isNotBlank(login));
+    }
+
+    @Test
+    void testLoginFail() throws Exception {
+        Person person = fairy.person();
+        String username = person.getUsername();
+        String password = person.getPassword();
+        LoginUserDTO loginUserDTO = LoginUserDTO.build(username, password);
+
+        Mockito.when(authenticationConfiguration.getAuthenticationManager()).thenReturn(authenticationManager);
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(loginUserDTO.getUsername(), loginUserDTO.getPassword());
+        Mockito.when(authenticationManager.authenticate(token)).thenThrow(InternalAuthenticationServiceException.class);
+
+        Assertions.assertThrows(UserException.class, () -> userService.login(loginUserDTO), "登录失败");
+    }
+
+    @Test
+    void testLoginFail2() throws Exception {
+        Person person = fairy.person();
+        String username = person.getUsername();
+        String password = person.getPassword();
+        LoginUserDTO loginUserDTO = LoginUserDTO.build(username, password);
+
+        Mockito.when(authenticationConfiguration.getAuthenticationManager()).thenReturn(authenticationManager);
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(loginUserDTO.getUsername(), loginUserDTO.getPassword());
+        Mockito.when(authenticationManager.authenticate(token)).thenThrow(RuntimeException.class);
+
+        Assertions.assertThrows(BaseException.class, () -> userService.login(loginUserDTO));
     }
 }

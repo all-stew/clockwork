@@ -29,6 +29,6 @@ public class UserController {
     @PostMapping("/login")
     public ApiResponse<LoginUserResponseVO> login(@RequestBody LoginUserRequestVO loginUserRequestVO) {
         String jwt = userService.login(userTransformer.toLoginUser(loginUserRequestVO));
-        return ApiResponse.ok(LoginUserResponseVO.builder().token(jwt).build());
+        return ApiResponse.ok(LoginUserResponseVO.build(jwt));
     }
 }
