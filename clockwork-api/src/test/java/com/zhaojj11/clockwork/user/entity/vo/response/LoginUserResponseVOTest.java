@@ -8,9 +8,9 @@ class LoginUserResponseVOTest {
     @Test
     void test() {
         LoginUserResponseVO vo = LoginUserResponseVO.build("test");
-        Assertions.assertEquals(vo.getToken(), "test");
+        Assertions.assertEquals("test", vo.getToken());
 
         vo.setToken("hello");
-        Assertions.assertEquals(vo.getToken(), "hello");
+        Assertions.assertEquals("hello", vo.getToken());
     }
 }

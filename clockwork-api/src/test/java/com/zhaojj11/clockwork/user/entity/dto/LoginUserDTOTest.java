@@ -7,12 +7,12 @@ class LoginUserDTOTest {
     @Test
     void test() {
         LoginUserDTO dto = LoginUserDTO.build("test", "test");
-        Assertions.assertEquals(dto.getUsername(), "test");
-        Assertions.assertEquals(dto.getPassword(), "test");
+        Assertions.assertEquals("test", dto.getUsername());
+        Assertions.assertEquals("test", dto.getPassword());
 
         dto.setUsername("hello");
         dto.setPassword("hello");
-        Assertions.assertEquals(dto.getUsername(), "hello");
-        Assertions.assertEquals(dto.getPassword(), "hello");
+        Assertions.assertEquals("hello", dto.getUsername());
+        Assertions.assertEquals("hello", dto.getPassword());
     }
 }
