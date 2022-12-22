@@ -12,10 +12,6 @@ public class UserException extends BaseException {
         super(message);
     }
 
-    public UserException(Exception e) {
-        super(e);
-    }
-
     public UserException(Integer code, String message) {
         super(code, message);
     }

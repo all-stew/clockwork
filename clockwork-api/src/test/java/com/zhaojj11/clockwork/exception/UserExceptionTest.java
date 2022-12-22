@@ -8,13 +8,11 @@ class UserExceptionTest {
     @Test
     void testUserException() {
 
-        Assertions.assertThrows(UserException.class, () -> {
+        try {
             throw new UserException("hello");
-        }, "hello");
-
-        Assertions.assertThrows(UserException.class, () -> {
-            throw new UserException(new Exception("hello"));
-        }, "hello");
+        } catch (BaseException e) {
+            Assertions.assertEquals("hello", e.getMessage());
+        }
 
         try {
             throw new UserException(200, "hello");

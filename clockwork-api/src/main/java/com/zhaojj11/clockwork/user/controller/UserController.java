@@ -31,4 +31,10 @@ public class UserController {
         String jwt = userService.login(userTransformer.toLoginUser(loginUserRequestVO));
         return ApiResponse.ok(LoginUserResponseVO.build(jwt));
     }
+
+    @PostMapping("/logout")
+    public ApiResponse<Object> logout() {
+        userService.logout();
+        return ApiResponse.ok();
+    }
 }

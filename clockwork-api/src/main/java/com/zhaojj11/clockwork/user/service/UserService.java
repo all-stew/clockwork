@@ -17,7 +17,12 @@ public interface UserService {
      * @return jwt
      */
     @NonNull
-    String login(@NonNull LoginUserDTO dto);
+    String login(LoginUserDTO dto);
+
+    /**
+     * 登出
+     */
+    void logout();
 
     /**
      * 获取loginUserDetailDTO

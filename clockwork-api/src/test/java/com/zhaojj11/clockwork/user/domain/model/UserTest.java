@@ -34,7 +34,7 @@ class UserTest {
 
     @Test
     void testUserStatus() {
-        Assertions.assertEquals(User.UserStatus.ENABLE.getStatus(), 0);
+        Assertions.assertEquals(0, User.UserStatus.ENABLE.getStatus());
     }
 
     @Test
