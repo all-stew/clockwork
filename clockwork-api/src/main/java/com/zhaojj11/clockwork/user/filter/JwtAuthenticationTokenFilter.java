@@ -3,9 +3,8 @@ package com.zhaojj11.clockwork.user.filter;
 import com.zhaojj11.clockwork.common.constants.RedisConstants;
 import com.zhaojj11.clockwork.common.utils.JwtUtil;
 import com.zhaojj11.clockwork.exception.UserException;
-import com.zhaojj11.clockwork.user.domain.dao.UserDao;
-import com.zhaojj11.clockwork.user.domain.model.User;
-import com.zhaojj11.clockwork.user.service.impl.UserDetailsServiceImpl;
+import com.zhaojj11.clockwork.user.entity.dto.LoginUserDetails;
+import com.zhaojj11.clockwork.user.service.UserService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +21,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * @author zhaojj11
@@ -32,7 +30,8 @@ import java.util.Objects;
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     private final RedisTemplate<String, String> redisTemplate;
-    private final UserDao userDao;
+
+    private final UserService userService;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
@@ -60,15 +59,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             redisTemplate.delete(loginUserKey);
             throw new UserException(401, "token is expire");
         }
-        User user = userDao.findByUsername(username);
-        if (Objects.isNull(user)) {
-            throw new UserException("invalid username or password");
-        }
-        UserDetailsServiceImpl.LoginUser loginUser = new UserDetailsServiceImpl.LoginUser(user);
+
+        LoginUserDetails loginUserDetails = userService.getLoginUserDetailDtoOrFail(username);
 
         // 存入SecurityContextHolder
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginUser, null, null);
+                new UsernamePasswordAuthenticationToken(loginUserDetails, null, loginUserDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         filterChain.doFilter(request, response);
     }
