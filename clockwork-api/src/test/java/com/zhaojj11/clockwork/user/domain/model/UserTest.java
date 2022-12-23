@@ -39,6 +39,11 @@ class UserTest {
 
     @Test
     void testBuildRegisterUser() {
-
+        User user = User.buildRegisterUser("test", "test", "test", "test", "test");
+        Assertions.assertEquals("test", user.getUsername());
+        Assertions.assertEquals("test", user.getNickname());
+        Assertions.assertEquals("test", user.getPassword());
+        Assertions.assertEquals("test", user.getEmail());
+        Assertions.assertEquals("test", user.getAvatar());
     }
 }

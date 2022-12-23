@@ -59,23 +59,20 @@ public class Menu implements Serializable {
 
     @NonNull
     public static Menu build(
-            @NonNull String name, long parentId, int orderNum,
-            @NonNull String url, @NonNull Target target, @NonNull Type type,
-            @NonNull Status status, @NonNull String permission, @NonNull String icon,
-            @NonNull String remark
+            @NonNull String name
     ) {
         Menu menu = new Menu();
         menu.setId(null);
         menu.setName(name);
-        menu.setParentId(parentId);
-        menu.setOrderNum(orderNum);
-        menu.setUrl(url);
-        menu.setTarget(target);
-        menu.setType(type);
-        menu.setStatus(status);
-        menu.setPermission(permission);
-        menu.setIcon(icon);
-        menu.setRemark(remark);
+        menu.setParentId(0L);
+        menu.setOrderNum(1);
+        menu.setUrl("");
+        menu.setTarget(Target.MENU_ITEM);
+        menu.setType(Type.MENU);
+        menu.setStatus(Status.ENABLE);
+        menu.setPermission("");
+        menu.setIcon("");
+        menu.setRemark("");
         menu.setDeleted(false);
         menu.setCreatedTime(LocalDateTime.now());
         menu.setUpdatedTime(LocalDateTime.now());
@@ -95,10 +92,10 @@ public class Menu implements Serializable {
 
         @EnumValue
         @JsonValue
-        private final int target;
+        private final int value;
 
-        Target(int target) {
-            this.target = target;
+        Target(int value) {
+            this.value = value;
         }
     }
 
@@ -119,10 +116,10 @@ public class Menu implements Serializable {
 
         @EnumValue
         @JsonValue
-        private final int type;
+        private final int value;
 
-        Type(int type) {
-            this.type = type;
+        Type(int value) {
+            this.value = value;
         }
     }
 
@@ -139,10 +136,10 @@ public class Menu implements Serializable {
 
         @EnumValue
         @JsonValue
-        private final int status;
+        private final int value;
 
-        Status(int status) {
-            this.status = status;
+        Status(int value) {
+            this.value = value;
         }
     }
 

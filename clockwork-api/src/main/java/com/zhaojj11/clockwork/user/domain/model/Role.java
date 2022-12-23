@@ -73,10 +73,10 @@ public class Role {
 
         @EnumValue
         @JsonValue
-        private final int status;
+        private final int value;
 
-        Status(int status) {
-            this.status = status;
+        Status(int value) {
+            this.value = value;
         }
     }
 

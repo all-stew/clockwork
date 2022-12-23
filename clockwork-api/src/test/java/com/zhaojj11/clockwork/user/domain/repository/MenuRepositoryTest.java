@@ -28,15 +28,15 @@ class MenuRepositoryTest {
 
     @BeforeAll
     static void init() {
-        Menu menu1 = Menu.build("test1", 0, 0, "test1", Menu.Target.MENU_ITEM, Menu.Type.MENU, Menu.Status.ENABLE, "test1", "test1", "test1");
+        Menu menu1 = Menu.build("test1");
         menu1.setId(1L);
         DATA_MENU_LIST.add(menu1);
 
-        Menu menu2 = Menu.build("test1", 0, 0, "test1", Menu.Target.MENU_ITEM, Menu.Type.MENU, Menu.Status.ENABLE, "test1", "test1", "test1");
+        Menu menu2 = Menu.build("test1");
         menu1.setId(2L);
         DATA_MENU_LIST.add(menu2);
 
-        Menu menu3 = Menu.build("test1", 0, 0, "test1", Menu.Target.MENU_ITEM, Menu.Type.MENU, Menu.Status.ENABLE, "test1", "test1", "test1");
+        Menu menu3 = Menu.build("test1");
         menu1.setId(3L);
         DATA_MENU_LIST.add(menu3);
     }
