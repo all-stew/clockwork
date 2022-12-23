@@ -24,7 +24,7 @@ class UserTest {
         user.setAvatar("test");
         Assertions.assertEquals("test", user.getAvatar());
         user.setDeleted(true);
-        Assertions.assertTrue(user.getDeleted());
+        Assertions.assertTrue(user.isDeleted());
         LocalDateTime now = LocalDateTime.now();
         user.setCreatedTime(now);
         Assertions.assertEquals(now, user.getCreatedTime());
@@ -35,5 +35,15 @@ class UserTest {
     @Test
     void testUserStatus() {
         Assertions.assertEquals(0, User.UserStatus.ENABLE.getStatus());
+    }
+
+    @Test
+    void testBuildRegisterUser() {
+        User user = User.buildRegisterUser("test", "test", "test", "test", "test");
+        Assertions.assertEquals("test", user.getUsername());
+        Assertions.assertEquals("test", user.getNickname());
+        Assertions.assertEquals("test", user.getPassword());
+        Assertions.assertEquals("test", user.getEmail());
+        Assertions.assertEquals("test", user.getAvatar());
     }
 }
